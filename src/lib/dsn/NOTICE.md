@@ -1,6 +1,6 @@
 # Dice So Nice — versión modificada
 
-Este directorio contiene una versión **modificada** del motor de
+El motor de dados de Roliando (`src/lib/dsn/`) es una versión **modificada** de
 [Dice So Nice](https://gitlab.com/riccisi/foundryvtt-dice-so-nice) 6.2.8,
 un módulo para Foundry VTT de **Simone Ricciardi y JDW**, publicado bajo la
 **GNU Affero General Public License v3.0** (texto completo en `LICENSE`).
@@ -31,6 +31,6 @@ Los temas y caras de `themes/niceMoreDice.js` y `public/modules/nice-more-dice/`
 
 ## Código fuente
 
-Publicado en https://github.com/churritonala-creator/roliando-dice-so-nice (enlazado desde la
-página de licencias). Tras cambiar algo aquí o en `public/modules/dice-so-nice|nice-more-dice`,
-publicar con `scripts/dsn/publicar-fuente.sh`.
+El código completo de esta versión se publica en
+https://github.com/churritonala-creator/roliando-dice-so-nice, enlazado desde la página de
+licencias de Roliando.
