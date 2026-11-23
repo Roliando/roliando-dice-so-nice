@@ -28,3 +28,9 @@ Los temas y caras de `themes/niceMoreDice.js` y `public/modules/nice-more-dice/`
 - Retirado el preset y el sistema «Foundry VTT» (con el logo de Foundry) y su fuente.
 - `themeImport.js`: importación de temas exportados desde Dice So Nice.
 - Rutas de assets absolutas, worker de física con la sintaxis `?worker` de Vite, `stats-gl` sin uso.
+
+## Código fuente
+
+Publicado en https://github.com/churritonala-creator/roliando-dice-so-nice (enlazado desde la
+página de licencias). Tras cambiar algo aquí o en `public/modules/dice-so-nice|nice-more-dice`,
+publicar con `scripts/dsn/publicar-fuente.sh`.
