@@ -32,5 +32,5 @@ Los temas y caras de `themes/niceMoreDice.js` y `public/modules/nice-more-dice/`
 ## Código fuente
 
 El código completo de esta versión se publica en
-https://github.com/churritonala-creator/roliando-dice-so-nice, enlazado desde la página de
+https://github.com/roliando/roliando-dice-so-nice, enlazado desde la página de
 licencias de Roliando.
