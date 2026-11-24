@@ -130,28 +130,6 @@ Hooks.on('diceSoNiceReady', (dice3d) => {
     system:"Dragon1"
   });
 
-  dice3d.addSystem({id:"OoFYeah",name:"⁂ OoFYeah (d20, 20 best)"},false);
-
-  dice3d.addDicePreset({
-    type:"d20",
-    labels:[
-      'modules/nice-more-dice/faces/oof.webp','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19',
-      'modules/nice-more-dice/faces/fuckyeah.webp'
-    ],
-    system:"OoFYeah"
-  });
-
-  dice3d.addSystem({id:"YeahOof",name:"⁂ YeahOof (d20, 1 best)"},false);
-
-  dice3d.addDicePreset({
-    type:"d20",
-    labels:[
-      'modules/nice-more-dice/faces/fuckyeah.webp','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19',
-      'modules/nice-more-dice/faces/oof.webp'
-    ],
-    system:"YeahOof"
-  });
-
   dice3d.addSystem({id:"scriblemotions",name:"⁂ Scriblemotions (d6, special)"},false);
 
   dice3d.addDicePreset({

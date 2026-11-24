@@ -28,6 +28,7 @@ Los temas y caras de `themes/niceMoreDice.js` y `public/modules/nice-more-dice/`
   mapeo de las skins de dados, ajustes de calidad en móvil, brillo y temas animados).
 - `engine/DiceFactory.js`: el canvas emisivo también dibuja el patrón de las texturas con brillo.
 - Retirado el preset y el sistema «Foundry VTT» (con el logo de Foundry) y su fuente.
+- Nice More Dice: retirados los sistemas «OoFYeah» y «YeahOof» y sus dos caras (`oof`, `fuckyeah`).
 - `themeImport.js`: importación de temas exportados desde Dice So Nice.
 - Rutas de assets absolutas, worker de física con la sintaxis `?worker` de Vite, `stats-gl` sin uso.
 - `engine/colisor.js`: forma de choque convexa para dados con modelo 3D propio.
