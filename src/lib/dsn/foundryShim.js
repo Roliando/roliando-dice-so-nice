@@ -28,6 +28,15 @@ import { mergeObject, deepClone, isEmpty, getType, getProperty, setProperty, has
  * ------------------------------------------------------------------ */
 
 let _audioCtx = null;
+/*
+ * Sonido delegado: cuando el motor corre dentro de la página propia (un iframe), el navegador puede
+ * negarle el audio por falta de gesto del usuario en ese marco (Safari). Esa página registra aquí
+ * quien SÍ puede sonar —la ventana que la contiene— y el motor le pasa la URL, el tramo y el volumen.
+ * Sin delegado, suena con su propio Web Audio como siempre.
+ */
+let _sonidoExterno = null;
+export function usarSonidoExterno(impl) { _sonidoExterno = impl || null; }
+
 function getAudioContext() {
   if (_audioCtx) return _audioCtx;
   try {
@@ -47,6 +56,7 @@ class WebAudioSound {
     this._buffer = null;
   }
   async load() {
+    if (_sonidoExterno) { try { _sonidoExterno.precargar(resolveDsnUrl(this.src)); } catch { /* audio best-effort */ } return this; }
     if (!this.context) return this;
     if (WebAudioSound._cache[this.src]) { this._buffer = await WebAudioSound._cache[this.src]; return this; }
     const p = fetch(resolveDsnUrl(this.src))
@@ -57,6 +67,7 @@ class WebAudioSound {
     return this;
   }
   play({ loopStart = 0, loopEnd = 0, volume = 1 } = {}) {
+    if (_sonidoExterno) { try { _sonidoExterno.reproducir(resolveDsnUrl(this.src), { loopStart, loopEnd, volume }); } catch { /* audio best-effort */ } return this; }
     const ctx = this.context;
     if (!ctx || !this._buffer) return this;
     try {

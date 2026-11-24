@@ -22,12 +22,18 @@ Los temas y caras de `themes/niceMoreDice.js` y `public/modules/nice-more-dice/`
 
 - Desacoplado de Foundry VTT: `foundryShim.js` sustituye a los globales de Foundry
   (`game`, `Hooks`, `ui`, `CONFIG`, `foundry.utils`) y `DsnEngine.js` sustituye a `Dice3D.js`.
+- `pagina/` (con `dados.html`): el motor corre como programa aparte, en su propia página dentro de un iframe del mismo origen; solo recibe órdenes y devuelve resultados por `postMessage`, y el sonido lo reproduce la ventana que lo contiene (`foundryShim.js`, `usarSonidoExterno`). `motorDados.js` elige el modo: `arenaDados.js` (las tiradas) o `vistaDado.js` (`?modo=vista`: un dado suelto que se gira con el puntero y se actualiza en vivo con el estado que le manda la ventana, para el estudio y el creador de dados).
+- `registroModulos.js`: alta en el motor de los dados, texturas y colorsets de los módulos importados, recibidos como datos (orden `registrar`).
 - `dsnArena.js`: arena de tiradas de Roliando (cola de tiradas, resultado predeterminado,
   mapeo de las skins de dados, ajustes de calidad en móvil, brillo y temas animados).
 - `engine/DiceFactory.js`: el canvas emisivo también dibuja el patrón de las texturas con brillo.
 - Retirado el preset y el sistema «Foundry VTT» (con el logo de Foundry) y su fuente.
 - `themeImport.js`: importación de temas exportados desde Dice So Nice.
 - Rutas de assets absolutas, worker de física con la sintaxis `?worker` de Vite, `stats-gl` sin uso.
+- `engine/colisor.js`: forma de choque convexa para dados con modelo 3D propio.
+- `contrato/`: extrae de la geometría de los dados los datos de forma que usa el editor de dados
+  (`mapasDeCaras.js`: dónde cae cada cara en su textura y la red desplegada; `contrato.js`: el
+  archivo de datos que se genera con ello).
 
 ## Código fuente
 

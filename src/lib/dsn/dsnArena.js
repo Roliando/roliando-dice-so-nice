@@ -176,7 +176,9 @@ const texReady = new Map();
 async function resolveSkinTexture(engine, cs) {
   // 1) custom/packed texture — a URL (__tex) or a live canvas (__img)
   if (cs.__tex || cs.__img) {
+    // `__img` llega como lienzo vivo (mismo documento) o ya como URL de datos (cuando cruza desde la app).
     let source = cs.__tex;
+    if (!source && typeof cs.__img === 'string') source = cs.__img;
     if (!source && cs.__img?.toDataURL) { try { source = cs.__img.toDataURL(); } catch { source = null; } }
     if (!source) return 'none';
     const bump = cs.__bump || '';
@@ -184,6 +186,7 @@ async function resolveSkinTexture(engine, cs) {
     // Mapa EMISIVO de la skin (capas de brillo del Estudio): url del bucket o canvas
     // en vivo → el motor lo dibuja en el canal emisivo del tile (LUZ de verdad).
     let emissive = cs.__glowTex || '';
+    if (!emissive && typeof cs.__glowImg === 'string') emissive = cs.__glowImg;
     if (!emissive && cs.__glowImg?.toDataURL) { try { emissive = cs.__glowImg.toDataURL(); } catch { emissive = ''; } }
     const id = 'rol-' + hashStr(`${typeof source === 'string' ? source.slice(0, 160) : 'live'}|${bump}|${composite}|${typeof emissive === 'string' ? emissive.slice(0, 120) : ''}`);
     // Se espera la PROMESA de carga, no la entrada de TEXTURELIST. `addTexture` escribe
@@ -851,26 +854,14 @@ let mesa = null;   // { factor } mientras la mesa 3D manda; null = bandeja de pa
 
 /**
  * Posa la bandeja sobre la mesa 3D (o la devuelve a su sitio con `rect = null`).
- * `rect` es el hueco del mapa en pantalla: {x, y, w, h} en píxeles de ventana.
+ * `rect` solo indica si hay mesa (null = bandeja de pantalla completa); el hueco en pantalla lo aplica la app al contenedor.
  */
 export function ponerBandejaEnMesa(rect, { factor = null } = {}) {
-  const el = containerEl || (typeof document === 'undefined' ? null : document.getElementById('dice-arena'));
   // Al cambiar de sitio o de tamaño, la caja se reconstruye: ver la cabecera de este bloque.
+  // Posar el contenedor sobre el hueco (left/top/width/height) es cosa de quien lo aloja: el motor
+  // solo recibe el tamaño que ya tiene.
   resetDsnArena();
-  if (!el) { mesa = null; return; }
-  if (!rect) {
-    el.style.left = ''; el.style.top = ''; el.style.width = ''; el.style.height = '';
-    el.style.right = ''; el.style.bottom = '';
-    mesa = null;
-    return;
-  }
-  el.style.left = `${Math.round(rect.x)}px`;
-  el.style.top = `${Math.round(rect.y)}px`;
-  el.style.width = `${Math.round(rect.w)}px`;
-  el.style.height = `${Math.round(rect.h)}px`;
-  el.style.right = 'auto';
-  el.style.bottom = 'auto';
-  mesa = { factor: Number(factor) > 0 ? Number(factor) : 1 };
+  mesa = rect ? { factor: Number(factor) > 0 ? Number(factor) : 1 } : null;
 }
 
 /*

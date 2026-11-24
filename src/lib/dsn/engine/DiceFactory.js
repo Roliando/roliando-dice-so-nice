@@ -10,7 +10,7 @@ import {DiceColors, DICE_SCALE, COLORSETS} from './DiceColors.js';
 import {DICE_MODELS, DICE_SHAPE} from './DiceModels.js';
 import {DiceSystem} from '../DiceSystem.js';
 import {DiceLibrary} from './DiceLibrary.js';
-import {colisorDeModelo, puntosDeEscena} from '../../dice3d/colisor.js';
+import {colisorDeModelo, puntosDeEscena} from './colisor.js';
 import {TARGET_D6_EDGE_METERS} from './SceneConstants.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
